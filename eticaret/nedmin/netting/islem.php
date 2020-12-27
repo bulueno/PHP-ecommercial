@@ -9,7 +9,7 @@ if (isset($_POST['admingiris'])){
 
 	$kullanici_mail=$_POST['kullanici_mail'];
 
-	 $kullanici_password=md5($_POST['kullanici_password']);
+	 $kullanici_password=$_POST['kullanici_password'];
 
 
 
@@ -21,22 +21,23 @@ if (isset($_POST['admingiris'])){
 	'yetki' => 5
 	));
 
-	echo $say=$kullanicisor->rowCount();
+	 $say=$kullanicisor->rowCount();
 
 
-	exit;
-/*
+	
+
 	if ($say==1) {
 
 		$_SESSION['kullanici_mail']=$kullanici_mail;
 
 		header("Location:../production/index.php");
+		exit;
 		# code...
 	} else {
 		header("Location:../production/login.php?durum=no");
 	}
 
-*/
+
 
 }
 
@@ -221,6 +222,93 @@ if ($update) {
 }
 
 
+
+if (isset($_POST['kullaniciduzenle'])) 
+{ 
+
+$kullanici_id=$_POST['kullanici_id'];	
+
+$ayarkaydet=$db->prepare("UPDATE kullanici SET
+kullanici_tc=:kullanici_tc,
+kullanici_adsoyad=:kullanici_adsoyad,
+kullanici_durum=:kullanici_durum
+WHERE kullanici_id={$_POST['kullanici_id']}");
+
+
+$update=$ayarkaydet->execute(array(
+'kullanici_tc' => $_POST['kullanici_tc'],
+'kullanici_adsoyad' => $_POST['kullanici_adsoyad'],
+'kullanici_durum' => $_POST['kullanici_durum']
+));
+
+if ($update) {
+
+
+	header("Location:../production/kullanici-duzenle.php?kullanici_id=$kullanici_id&durum=ok");
+	# code...
+} else {
+
+	header("Location:../production/kullanici-duzenle.php?kullanici_id=$kullanici_id&durum=no");
+}
+
+}
+
+
+if ($_GET['kullanicisil']=="ok") {
+
+	$sil=$db->prepare("DELETE from kullanici where kullanici_id=:id");
+	$kontrol=$sil->execute(array(
+		'id' => $_GET['kullanici_id']
+		));
+	
+	if ($kontrol) {
+
+		header("Location:../production/kullanici.php?sil=ok");
+
+	
+	} else {
+
+
+
+		header("Location:../production/kullanici.php?sil=no");
+	}
+
+}
+
+
+if (isset($_POST['hakkimizdakaydet'])) 
+{ 
+
+	
+//tablo güncelleme kodları
+$ayarkaydet=$db->prepare("UPDATE hakkimizda SET
+hakkimizda_baslik=:hakkimizda_baslik,
+hakkimizda_icerik=:hakkimizda_icerik,
+hakkimizda_video=:hakkimizda_video,
+hakkimizda_vizyon=:hakkimizda_vizyon,
+hakkimizda_misyon=:hakkimizda_misyon
+WHERE hakkimizda_id=0");
+
+
+$update=$ayarkaydet->execute(array(
+'hakkimizda_baslik' => $_POST['hakkimizda_baslik'],
+'hakkimizda_icerik' => $_POST['hakkimizda_icerik'],
+'hakkimizda_video' => $_POST['hakkimizda_video'],
+'hakkimizda_vizyon' => $_POST['hakkimizda_vizyon'],
+'hakkimizda_misyon' => $_POST['hakkimizda_misyon']
+));
+
+if ($update) {
+
+
+	header("Location:../production/hakkimizda.php?durum=ok");
+	# code...
+} else {
+
+	header("Location:../production/hakkimizda.php?durum=no");
+}
+
+}
 
 
 

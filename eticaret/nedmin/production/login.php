@@ -73,7 +73,7 @@
               <br />
 
               <div>
-                <h1><i class="fa fa-paw"></i> WOW Marketplace</h1>
+                <h1><i class="fa fa-paw"></i> Punk </h1>
                 <p>©2020 ...</p>
               </div>
             </div>

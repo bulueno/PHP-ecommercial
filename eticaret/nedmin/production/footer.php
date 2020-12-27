@@ -1,7 +1,7 @@
 <!-- footer content -->
         <footer>
           <div class="pull-right">
-            WOW Araba Parça <a href="https://www.wowaraba.com">WOW</a>
+            WOW Marketplace<a href="https://www.wowmarketplace.com"> WOW</a>
           </div>
           <div class="clearfix"></div>
         </footer>

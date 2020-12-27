@@ -2,7 +2,7 @@
 
 try {
 
-$db=new PDO("mysql:host=localhost;dbname=localdb;charset=utf8", 'root', '37zpto4k');
+$db=new PDO("mysql:host=localhost;dbname=localdb;charset=utf8", 'root', '123456');
 //echo "veritabanı bağlantısı başarılı";
 
 	
